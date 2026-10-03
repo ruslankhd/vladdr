@@ -52,9 +52,7 @@
     </section>
 
     <section class="panel">
-      <div class="grille" aria-hidden="true"></div>
-
-      <div class="controls">
+      <div class="panel-top">
         <div class="wordmark">
           <span class="wordmark-name">vlad engineering</span>
           <span class="wordmark-model">VE–1 record player</span>
@@ -70,9 +68,18 @@
             <span class="display-rpm">33⅓ rpm</span>
           </span>
         </div>
+      </div>
 
-        <div class="greeting" id="greeting">
-          <span class="greeting-text">С днем рождения, Влад!</span>
+      <div class="greeting" id="greeting">
+        <span class="greeting-text">С днем рождения, Влад!</span>
+      </div>
+
+      <div class="grille" aria-hidden="true"></div>
+
+      <div class="controls">
+        <div class="key-group" aria-hidden="true">
+          <span class="knob"></span>
+          <span class="key-caption">volume</span>
         </div>
 
         <button class="power-btn" id="powerBtn" type="button" aria-pressed="false">
@@ -85,11 +92,6 @@
             <span class="label-off">stop</span>
           </span>
         </button>
-
-        <div class="key-group" aria-hidden="true">
-          <span class="knob"></span>
-          <span class="key-caption">volume</span>
-        </div>
       </div>
     </section>
   </main>

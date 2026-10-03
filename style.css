@@ -11,8 +11,10 @@
   --white: #f6f6f3;
   --vinyl-black: #1b1b1a;
 
-  /* Oversized record: wider than the viewport on phones, taller than it on desktops */
-  --vinyl: min(135vh, 135vw);
+  /* Oversized record: taller than the screen, pushed to the left edge */
+  --vinyl: 125vh;
+  --vinyl-center: 36%;
+  --tonearm-base: clamp(64px, 8vw, 120px);
   --spin-duration: 2.4s;
   --gutter: clamp(14px, 2vw, 28px);
 }
@@ -41,22 +43,22 @@ body {
   height: 100vh;
   height: 100dvh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 30%),
     var(--shell);
 }
 
-/* ---------- Deck: cropped at the top, record overflows ---------- */
+/* ---------- Deck: left side, cropped by the screen edge, record overflows ---------- */
 .deck {
   position: relative;
   flex: 1 1 auto;
-  min-height: 0;
-  margin: -40px var(--gutter) 0;
-  border-radius: 0 0 18px 18px;
+  min-width: 0;
+  margin: var(--gutter) 0 var(--gutter) -40px;
+  border-radius: 0 18px 18px 0;
   background: var(--deck);
   border: 1px solid var(--deck-edge);
-  border-top: 0;
+  border-left: 0;
   box-shadow:
     inset 0 -1px 0 rgba(255, 255, 255, 0.6),
     inset 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -65,7 +67,7 @@ body {
 
 .deck-caption {
   position: absolute;
-  left: 16px;
+  right: 18px;
   bottom: 12px;
   display: flex;
   gap: 14px;
@@ -79,7 +81,7 @@ body {
 .platter {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: var(--vinyl-center);
   width: calc(var(--vinyl) + 28px);
   height: calc(var(--vinyl) + 28px);
   transform: translate(-50%, -50%);
@@ -200,8 +202,12 @@ body {
 .tonearm {
   position: absolute;
   top: 56px;
-  right: clamp(24px, 4vw, 64px);
-  width: clamp(64px, 8vw, 120px);
+  /* Sit on the record's right edge, but never leave the deck */
+  left: min(
+    calc(var(--vinyl-center) + var(--vinyl) / 2 - var(--tonearm-base) / 2),
+    calc(100% - var(--tonearm-base) - 16px)
+  );
+  width: var(--tonearm-base);
   aspect-ratio: 1 / 1;
   pointer-events: none;
   z-index: 2;
@@ -259,13 +265,19 @@ body {
   transform: rotate(14deg);
 }
 
-/* ---------- Bottom control panel ---------- */
+/* ---------- Right control panel ---------- */
 .panel {
-  flex: 0 0 auto;
-  padding: 10px var(--gutter) clamp(14px, 2.4vh, 24px);
+  flex: 0 0 clamp(250px, 27vw, 380px);
+  padding: var(--gutter);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: clamp(14px, 2.4vh, 24px);
+}
+
+.panel-top {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .grille {
@@ -280,7 +292,8 @@ body {
 
 .controls {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: clamp(14px, 2.4vw, 32px);
 }
 
@@ -310,7 +323,7 @@ body {
 
 .display {
   flex: 0 0 auto;
-  min-width: 132px;
+  align-self: stretch;
   padding: 8px 10px;
   border-radius: 6px;
   background: var(--ink);
@@ -374,21 +387,39 @@ body {
 
 /* Greeting strip (printed label on the shell) */
 .greeting {
+  position: relative;
   flex: 1 1 auto;
-  min-width: 0;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 10px 14px;
-  border-radius: 6px;
+  padding: 16px;
+  border-radius: 10px;
   border: 1px dashed var(--deck-edge);
   color: var(--ink);
   font-weight: 600;
-  font-size: clamp(15px, 2vw, 24px);
-  letter-spacing: -0.01em;
-  white-space: nowrap;
+  font-size: clamp(20px, 2.6vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-wrap: balance;
   transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+.greeting::before {
+  content: "press play";
+  position: absolute;
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: opacity 0.3s ease;
+}
+
+.greeting.is-visible::before {
+  opacity: 0;
 }
 
 .greeting-text {
@@ -563,36 +594,55 @@ body {
 
 /* ---------- Narrow screens ---------- */
 @media (max-width: 760px) {
-  .controls {
-    flex-wrap: wrap;
-    row-gap: 12px;
+  :root {
+    --vinyl: 125vw;
+    --vinyl-center: 44%;
   }
 
-  .wordmark {
-    display: none;
+  .device {
+    flex-direction: column;
+  }
+
+  .deck {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: -40px var(--gutter) 0 -40px;
+    border-radius: 0 0 18px 0;
+    border-top: 0;
+  }
+
+  .panel {
+    flex: 0 0 auto;
+    gap: 12px;
+  }
+
+  .panel-top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .display {
+    align-self: auto;
     flex: 1 1 auto;
     flex-direction: row;
     justify-content: space-between;
-    order: 1;
   }
 
   .greeting {
-    flex: 1 1 100%;
-    order: 3;
-    min-height: 44px;
-    white-space: normal;
-    text-align: center;
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 10px 14px;
+    font-size: 17px;
   }
 
-  .power-btn {
-    order: 2;
-  }
-
-  .key-group {
+  .grille {
     display: none;
+  }
+
+  .controls {
+    justify-content: center;
+    gap: 32px;
   }
 
   .tonearm {
@@ -601,6 +651,12 @@ body {
 
   .deck-caption {
     display: none;
+  }
+}
+
+@media (max-width: 760px) and (max-height: 700px) {
+  :root {
+    --vinyl: 100vw;
   }
 }
 
