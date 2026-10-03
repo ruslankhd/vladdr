@@ -17,23 +17,11 @@
     <section class="deck">
       <div class="platter">
         <div class="vinyl" id="vinyl">
-          <svg class="ring-text" viewBox="0 0 100 100" aria-hidden="true">
-            <defs>
-              <path
-                id="ringPath"
-                d="M 50,50 m -27,0 a 27,27 0 1,1 54,0 a 27,27 0 1,1 -54,0"
-              />
-            </defs>
-            <text textLength="169.6" lengthAdjust="spacing">
-              <textPath href="#ringPath" startOffset="0">
-                С ДНЕМ РОЖДЕНИЯ, ВЛАД! &#8226; С ДНЕМ РОЖДЕНИЯ, ВЛАД! &#8226;
-              </textPath>
-            </text>
-          </svg>
-
+          <div class="vinyl-rotor">
           <div class="label">
             <div class="label-photo" role="img" aria-label="Фото Влада"></div>
             <div class="spindle"></div>
+          </div>
           </div>
         </div>
       </div>
@@ -70,8 +58,25 @@
         </div>
       </div>
 
-      <div class="greeting" id="greeting">
-        <span class="greeting-text">С днем рождения, Влад!</span>
+      <div class="panel-body">
+        <div class="faders" aria-hidden="true">
+          <div class="fader">
+            <span class="fader-rail"><span class="fader-cap" style="--pos: 72%"></span></span>
+            <span class="fader-caption">bass</span>
+          </div>
+          <div class="fader">
+            <span class="fader-rail"><span class="fader-cap" style="--pos: 46%"></span></span>
+            <span class="fader-caption">mid</span>
+          </div>
+          <div class="fader">
+            <span class="fader-rail"><span class="fader-cap" style="--pos: 61%"></span></span>
+            <span class="fader-caption">high</span>
+          </div>
+        </div>
+
+        <div class="greeting" id="greeting">
+          <span class="greeting-text">С днем рождения, Влад!</span>
+        </div>
       </div>
 
       <div class="grille" aria-hidden="true"></div>
@@ -82,16 +87,20 @@
           <span class="key-caption">volume</span>
         </div>
 
-        <button class="power-btn" id="powerBtn" type="button" aria-pressed="false">
-          <span class="power-face">
-            <span class="icon icon-play" aria-hidden="true"></span>
-            <span class="icon icon-stop" aria-hidden="true"></span>
-          </span>
-          <span class="power-label">
-            <span class="label-on">play</span>
-            <span class="label-off">stop</span>
-          </span>
-        </button>
+        <div class="transport">
+          <span class="key" aria-hidden="true"><span class="key-mark key-mark-prev"></span></span>
+          <button class="power-btn" id="powerBtn" type="button" aria-pressed="false">
+            <span class="power-face">
+              <span class="icon icon-play" aria-hidden="true"></span>
+              <span class="icon icon-stop" aria-hidden="true"></span>
+            </span>
+            <span class="power-label">
+              <span class="label-on">play</span>
+              <span class="label-off">stop</span>
+            </span>
+          </button>
+          <span class="key" aria-hidden="true"><span class="key-mark key-mark-next"></span></span>
+        </div>
       </div>
     </section>
   </main>
