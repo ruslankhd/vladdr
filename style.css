@@ -80,7 +80,7 @@ body {
 
 .platter {
   position: absolute;
-  top: 50%;
+  top: var(--vinyl-top, 50%);
   left: var(--vinyl-center);
   width: calc(var(--vinyl) + 28px);
   height: calc(var(--vinyl) + 28px);
@@ -585,8 +585,12 @@ body {
 /* ---------- Narrow screens ---------- */
 @media (max-width: 760px) {
   :root {
-    --vinyl: min(92vw, 42vh);
-    --vinyl-center: 50%;
+    /* Record stays oversized and cropped by the deck, not shrunk to fit it.
+       Its centre sits left of the deck so the pivot gets a free corner. */
+    --vinyl: min(122vw, 72vh);
+    --vinyl-center: 36%;
+    --vinyl-top: 62%;
+    --tonearm-base: 44px;
   }
 
   .device {
@@ -594,24 +598,65 @@ body {
   }
 
   .deck {
-    flex: 0 0 auto;
-    height: min(48vh, 52vw);
-    min-height: 220px;
+    flex: 1 1 auto;
+    min-height: 34vh;
     margin: -20px var(--gutter) 0 -20px;
     border-radius: 0 0 18px 0;
     border-top: 0;
   }
 
+  /* Pivot stands beside the record, and both rest angles keep the head
+     inside the deck so the stylus stays visible. */
+  .tonearm {
+    top: 24px;
+    left: auto;
+    right: 6px;
+  }
+
+  .tonearm-arm {
+    width: 11px;
+    margin-right: -5.5px;
+    transform: rotate(-2deg);
+  }
+
+  .is-playing .tonearm-arm {
+    transform: rotate(16deg);
+  }
+
+  .tonearm-head {
+    width: 240%;
+    height: 14%;
+  }
+
+  .tonearm-head::after {
+    width: 16%;
+    height: 66%;
+  }
+
+  /* Status bar and the play button share one row, greeting takes the rest */
   .panel {
-    flex: 1 1 auto;
-    min-height: 0;
-    gap: 12px;
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding-top: 12px;
   }
 
   .panel-top {
+    grid-column: 1;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .controls {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .greeting {
+    grid-column: 1 / -1;
   }
 
   .wordmark {
@@ -626,19 +671,40 @@ body {
   }
 
   .greeting {
-    flex: 1 1 auto;
-    min-height: 160px;
-    padding: 18px 16px;
+    flex: 0 0 auto;
+    min-height: 0;
+    padding: 12px 13px;
     align-items: flex-start;
   }
 
   .greeting-title {
-    font-size: 22px !important;
+    font-size: 17px !important;
+    margin-bottom: 6px !important;
   }
 
   .greeting-text p {
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .power-label {
+    display: none;
+  }
+
+  .power-face {
+    width: 56px;
+    height: 56px;
+  }
+
+  .icon-play {
+    border-left-width: 17px;
+    border-top-width: 11px;
+    border-bottom-width: 11px;
+  }
+
+  .icon-stop {
+    width: 17px;
+    height: 17px;
   }
 
   .grille {
@@ -649,14 +715,24 @@ body {
     display: none;
   }
 
-  .tonearm {
-    top: 36px;
-    left: auto;
-    right: 18px;
-  }
-
   .deck-caption {
     display: none;
+  }
+}
+
+@media (max-width: 760px) and (max-height: 700px) {
+  .greeting {
+    padding: 10px 12px;
+  }
+
+  .greeting-title {
+    font-size: 16px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .greeting-text p {
+    font-size: 12px;
+    line-height: 1.38;
   }
 }
 
