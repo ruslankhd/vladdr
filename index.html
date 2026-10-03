@@ -4,12 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>С днем рождения, Влад!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,10 +12,10 @@
       <div class="platter">
         <div class="vinyl" id="vinyl">
           <div class="vinyl-rotor">
-          <div class="label">
-            <div class="label-photo" role="img" aria-label="Фото Влада"></div>
-            <div class="spindle"></div>
-          </div>
+            <div class="label">
+              <div class="label-photo" role="img" aria-label="Фото Влада"></div>
+              <div class="spindle"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -32,54 +26,25 @@
           <div class="tonearm-head"></div>
         </div>
       </div>
-
-      <div class="deck-caption" aria-hidden="true">
-        <span>side a</span>
-        <span>direct drive</span>
-      </div>
     </section>
 
     <section class="panel">
       <div class="panel-top">
-        <div class="wordmark">
-          <span class="wordmark-name">vlad engineering</span>
-          <span class="wordmark-model">VE–1 record player</span>
-        </div>
-
-        <div class="display" aria-live="polite">
-          <span class="display-row">
-            <span class="led" id="led" aria-hidden="true"></span>
-            <span class="display-state" id="displayState">stop</span>
-          </span>
-          <span class="display-row">
-            <span class="display-time" id="displayTime">00:00</span>
-            <span class="display-rpm">33⅓ rpm</span>
-          </span>
-        </div>
+        <p class="script-mark">vlad</p>
+        <p class="model">record player</p>
       </div>
 
-      <div class="panel-body">
-        <div class="faders" aria-hidden="true">
-          <div class="fader">
-            <span class="fader-rail"><span class="fader-cap" style="--pos: 72%"></span></span>
-            <span class="fader-caption">bass</span>
-          </div>
-          <div class="fader">
-            <span class="fader-rail"><span class="fader-cap" style="--pos: 46%"></span></span>
-            <span class="fader-caption">mid</span>
-          </div>
-          <div class="fader">
-            <span class="fader-rail"><span class="fader-cap" style="--pos: 61%"></span></span>
-            <span class="fader-caption">high</span>
-          </div>
-        </div>
-
-        <div class="greeting" id="greeting">
-          <span class="greeting-text">С днем рождения, Влад!</span>
-        </div>
+      <div class="greeting" id="greeting">
+        <span class="greeting-text">С днем рождения, Влад!</span>
       </div>
 
-      <div class="grille" aria-hidden="true"></div>
+      <div class="speaker" aria-hidden="true"></div>
+
+      <div class="panel-meta">
+        <span class="display-time" id="displayTime">00:00</span>
+        <span class="display-state" id="displayState">stop</span>
+        <span class="display-rpm">33&#8531;</span>
+      </div>
 
       <div class="controls">
         <div class="key-group" aria-hidden="true">
@@ -87,20 +52,16 @@
           <span class="key-caption">volume</span>
         </div>
 
-        <div class="transport">
-          <span class="key" aria-hidden="true"><span class="key-mark key-mark-prev"></span></span>
-          <button class="power-btn" id="powerBtn" type="button" aria-pressed="false">
-            <span class="power-face">
-              <span class="icon icon-play" aria-hidden="true"></span>
-              <span class="icon icon-stop" aria-hidden="true"></span>
-            </span>
-            <span class="power-label">
-              <span class="label-on">play</span>
-              <span class="label-off">stop</span>
-            </span>
-          </button>
-          <span class="key" aria-hidden="true"><span class="key-mark key-mark-next"></span></span>
-        </div>
+        <button class="power-btn" id="powerBtn" type="button" aria-pressed="false">
+          <span class="power-face">
+            <span class="icon icon-play" aria-hidden="true"></span>
+            <span class="icon icon-stop" aria-hidden="true"></span>
+          </span>
+          <span class="power-label">
+            <span class="label-on">play</span>
+            <span class="label-off">stop</span>
+          </span>
+        </button>
       </div>
     </section>
   </main>
