@@ -250,7 +250,7 @@ body {
 
 /* ---------- Right control panel ---------- */
 .panel {
-  flex: 0 0 clamp(250px, 27vw, 380px);
+  flex: 0 0 clamp(280px, 32vw, 440px);
   padding: var(--gutter);
   display: flex;
   flex-direction: column;
@@ -261,72 +261,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.panel-body {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  gap: clamp(12px, 1.6vw, 20px);
-}
-
-.faders {
-  flex: 0 0 auto;
-  display: flex;
-  gap: clamp(10px, 1.4vw, 16px);
-}
-
-.fader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.fader-rail {
-  position: relative;
-  width: 8px;
-  flex: 1 1 auto;
-  border-radius: 999px;
-  background: repeating-linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.28) 0 1px,
-    transparent 1px 14px
-  );
-  box-shadow: inset 3px 0 0 #c4c4bf, inset -3px 0 0 #c4c4bf;
-}
-
-.fader-cap {
-  position: absolute;
-  left: 50%;
-  top: var(--pos);
-  width: 30px;
-  height: 18px;
-  transform: translate(-50%, -50%);
-  border-radius: 4px;
-  background: linear-gradient(180deg, #fdfdfb, #e1e1dd);
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 0, 0, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-.fader-cap::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 3px;
-  right: 3px;
-  height: 1px;
-  background: var(--orange);
-  transform: translateY(-50%);
-}
-
-.fader-caption {
-  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
 }
 
 .grille {
@@ -342,8 +276,7 @@ body {
 .controls {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  gap: clamp(14px, 2.4vw, 32px);
+  justify-content: center;
 }
 
 .wordmark {
@@ -443,16 +376,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: clamp(18px, 2.4vh, 28px) clamp(16px, 1.8vw, 24px);
   border-radius: 10px;
   border: 1px dashed var(--deck-edge);
   color: var(--ink);
-  font-weight: 600;
-  font-size: clamp(20px, 2.6vw, 38px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-align: center;
-  text-wrap: balance;
+  overflow: auto;
   transition: background 0.5s ease, border-color 0.5s ease;
 }
 
@@ -473,11 +401,30 @@ body {
 }
 
 .greeting-text {
+  margin: 0;
   opacity: 0;
   transform: translateY(6px);
+  text-align: left;
   transition:
     opacity 0.6s ease 0.15s,
     transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s;
+}
+
+.greeting-text p {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(14px, 1.35vw, 18px);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.greeting-title {
+  margin-bottom: 10px !important;
+  font-weight: 600 !important;
+  font-size: clamp(20px, 2.2vw, 28px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.03em !important;
 }
 
 .greeting.is-visible {
@@ -635,52 +582,11 @@ body {
   opacity: 1;
 }
 
-/* Volume knob */
-.key-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  flex: 0 0 auto;
-}
-
-.key-caption {
-  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.knob {
-  position: relative;
-  width: clamp(40px, 4.4vw, 52px);
-  height: clamp(40px, 4.4vw, 52px);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 45%, #2a2a28, var(--ink) 70%);
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.5),
-    0 3px 0 rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.knob::after {
-  content: "";
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  width: 6%;
-  height: 30%;
-  transform: translateX(-50%);
-  background: var(--orange);
-  border-radius: 2px;
-}
-
 /* ---------- Narrow screens ---------- */
 @media (max-width: 760px) {
   :root {
-    --vinyl: 125vw;
-    --vinyl-center: 44%;
+    --vinyl: min(92vw, 42vh);
+    --vinyl-center: 50%;
   }
 
   .device {
@@ -688,15 +594,17 @@ body {
   }
 
   .deck {
-    flex: 1 1 auto;
-    min-height: 0;
-    margin: -40px var(--gutter) 0 -40px;
+    flex: 0 0 auto;
+    height: min(48vh, 52vw);
+    min-height: 220px;
+    margin: -20px var(--gutter) 0 -20px;
     border-radius: 0 0 18px 0;
     border-top: 0;
   }
 
   .panel {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
+    min-height: 0;
     gap: 12px;
   }
 
@@ -706,6 +614,10 @@ body {
     justify-content: space-between;
   }
 
+  .wordmark {
+    display: none;
+  }
+
   .display {
     align-self: auto;
     flex: 1 1 auto;
@@ -713,51 +625,38 @@ body {
     justify-content: space-between;
   }
 
-  .panel-body {
-    flex: 0 0 auto;
-    gap: 14px;
-  }
-
-  .faders {
-    height: 92px;
-  }
-
-  .fader-rail {
-    height: auto;
-  }
-
   .greeting {
-    flex: 0 0 auto;
-    min-height: 48px;
-    padding: 10px 14px;
-    font-size: 17px;
+    flex: 1 1 auto;
+    min-height: 160px;
+    padding: 18px 16px;
+    align-items: flex-start;
+  }
+
+  .greeting-title {
+    font-size: 22px !important;
+  }
+
+  .greeting-text p {
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   .grille {
     display: none;
   }
 
-  .controls {
-    justify-content: center;
-    gap: 32px;
-  }
-
   .key {
-    margin-bottom: 22px;
+    display: none;
   }
 
   .tonearm {
-    top: 50px;
+    top: 36px;
+    left: auto;
+    right: 18px;
   }
 
   .deck-caption {
     display: none;
-  }
-}
-
-@media (max-width: 760px) and (max-height: 700px) {
-  :root {
-    --vinyl: 100vw;
   }
 }
 
