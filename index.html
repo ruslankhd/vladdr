@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>С днем рождения, Влад!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage">
+    <section class="device" id="turntable" aria-label="Проигрыватель пластинок">
+      <span class="screw screw-tl" aria-hidden="true"></span>
+      <span class="screw screw-tr" aria-hidden="true"></span>
+      <span class="screw screw-bl" aria-hidden="true"></span>
+      <span class="screw screw-br" aria-hidden="true"></span>
+
+      <header class="device-top">
+        <div class="wordmark">
+          <span class="wordmark-name">vlad engineering</span>
+          <span class="wordmark-model">VE–1 record player</span>
+        </div>
+
+        <div class="display" aria-live="polite">
+          <span class="display-row">
+            <span class="led" id="led" aria-hidden="true"></span>
+            <span class="display-state" id="displayState">stop</span>
+          </span>
+          <span class="display-row">
+            <span class="display-time" id="displayTime">00:00</span>
+            <span class="display-rpm">33⅓ rpm</span>
+          </span>
+        </div>
+      </header>
+
+      <div class="deck">
+        <div class="platter">
+          <div class="vinyl" id="vinyl">
+            <svg class="ring-text" viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <path
+                  id="ringPath"
+                  d="M 50,50 m -27,0 a 27,27 0 1,1 54,0 a 27,27 0 1,1 -54,0"
+                />
+              </defs>
+              <text textLength="169.6" lengthAdjust="spacing">
+                <textPath href="#ringPath" startOffset="0">
+                  С ДНЕМ РОЖДЕНИЯ, ВЛАД! &#8226; С ДНЕМ РОЖДЕНИЯ, ВЛАД! &#8226;
+                </textPath>
+              </text>
+            </svg>
+
+            <div class="label">
+              <div class="label-photo" role="img" aria-label="Фото Влада"></div>
+              <div class="spindle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tonearm" aria-hidden="true">
+          <div class="tonearm-base"></div>
+          <div class="tonearm-arm">
+            <div class="tonearm-head"></div>
+          </div>
+        </div>
+
+        <div class="deck-caption" aria-hidden="true">
+          <span>side a</span>
+          <span>direct drive</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="grille" aria-hidden="true"></div>
+
+        <div class="controls">
+          <div class="key-group" aria-hidden="true">
+            <span class="key"><span class="key-mark key-mark-prev"></span></span>
+            <span class="key"><span class="key-mark key-mark-next"></span></span>
+            <span class="key-caption">track</span>
+          </div>
+
+          <button class="power-btn" id="powerBtn" type="button" aria-pressed="false">
+            <span class="power-face">
+              <span class="icon icon-play" aria-hidden="true"></span>
+              <span class="icon icon-stop" aria-hidden="true"></span>
+            </span>
+            <span class="power-label">
+              <span class="label-on">play</span>
+              <span class="label-off">stop</span>
+            </span>
+          </button>
+
+          <div class="key-group" aria-hidden="true">
+            <span class="knob"></span>
+            <span class="key-caption">volume</span>
+          </div>
+        </div>
+
+        <div class="greeting" id="greeting">
+          <span class="greeting-text">С днем рождения, Влад!</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
